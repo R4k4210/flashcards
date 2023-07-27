@@ -1,5 +1,5 @@
-import { Subject } from '../models/Subject';
+import { TSubject } from '../models/Subject';
 
-export interface SubjectRepository {
-  getAll: () => Promise<Subject[]>;
+export interface ISubjectRepository {
+  getAll: () => Promise<TSubject[]>;
 }

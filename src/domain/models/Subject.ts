@@ -1,4 +1,4 @@
-export type Subject = {
+export type TSubject = {
   id: number;
   object: string;
   url: string;
