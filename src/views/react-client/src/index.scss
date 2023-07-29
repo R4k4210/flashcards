@@ -16,7 +16,7 @@
 
 @for $i from 1 through 6 {
     $base-size: 2.3rem;
-    $size: $base-size - ($i/6);
+    $size: $base-size - calc($i/6);
 
     .cards_characters_#{$i} {
         span {
