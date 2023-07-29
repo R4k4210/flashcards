@@ -13,3 +13,14 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 }
+
+@for $i from 1 through 6 {
+    $base-size: 2.3rem;
+    $size: $base-size - ($i/6);
+
+    .cards_characters_#{$i} {
+        span {
+            font-size: #{$size};
+        }
+    }
+}

@@ -10,8 +10,16 @@ const BASE_URL = process.env.WANIKANI_API_URL;
 export const wanikaniRepository = (): IWanikaniRepository => ({
     getAllSubjects: async () => {
         try {
-            const subjects = await http.get<SubjectsDTO>(`${BASE_URL}/subjects`);
-            return subjects.data.map((subjectDTO: SubjectDTO) => subjectMapper(subjectDTO));
+            let next_url = `${BASE_URL}/subjects`;
+            let subjectsCollection: SubjectDTO[] = [];
+
+            do {
+                const subjects = await http.get<SubjectsDTO>(next_url);
+                subjectsCollection = [...subjectsCollection, ...subjects.data];
+                next_url = subjects.pages.next_url;
+            } while (next_url !== null);
+
+            return subjectsCollection.map((subjectDTO: SubjectDTO) => subjectMapper(subjectDTO));
         } catch (error) {
             throw new Error(`Error getting subjects: ${error}`);
         }

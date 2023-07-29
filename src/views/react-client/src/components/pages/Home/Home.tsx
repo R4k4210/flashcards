@@ -1,24 +1,10 @@
-import { useEffect, useState } from 'react';
-import { TSubject } from '@core/wanikani/domain/models/Subject';
-import { wanikaniController } from '@core/wanikani/application/WanikaniController';
-import { wanikaniRepository } from '@core/wanikani/infrastructure/repositories/WanikaniRepository';
+import useGetSubjects from '@/hooks/wanikani/useGetSubjects';
 import styles from './Home.module.scss';
 import Card from './components/Card/Card';
 
 const Home = () => {
-    const [kanjis, setKanjis] = useState<TSubject[]>([]);
-    const [radicals, setRadicals] = useState<TSubject[]>([]);
-    const [vocabulary, setVocabulary] = useState<TSubject[]>([]);
-
-    useEffect(() => {
-        wanikaniController(wanikaniRepository())
-            .getSubjectsByUser()
-            .then((subjects) => {
-                setKanjis(subjects.filter((subject) => subject.object === 'kanji'));
-                setRadicals(subjects.filter((subject) => subject.object === 'radical'));
-                setVocabulary(subjects.filter((subject) => subject.object === 'vocabulary'));
-            });
-    }, []);
+    const { data, error, isLoading } = useGetSubjects();
+    const { kanjis, radicals, vocabulary } = data;
 
     return (
         <div className={styles.container}>
@@ -26,22 +12,28 @@ const Home = () => {
 
             <h2>Radicals</h2>
             <div className={styles.subjectsContainer}>
-                {radicals.map(({ characters, id, object }) => (
-                    <Card key={id} character={characters} object={object} />
+                {isLoading && <p>Loading...</p>}
+
+                {radicals.map(({ characters, id, object, character_images }) => (
+                    <Card type='radical' key={id} character={characters} object={object} character_images={character_images} />
                 ))}
             </div>
 
             <h2>Kanjis</h2>
             <div className={styles.subjectsContainer}>
+                {isLoading && <p>Loading...</p>}
+
                 {kanjis.map(({ characters, id, object }) => (
-                    <Card key={id} character={characters} object={object} />
+                    <Card type='kanji' key={id} character={characters} object={object} />
                 ))}
             </div>
 
             <h2>Vocabulary</h2>
             <div className={styles.subjectsContainer}>
+                {isLoading && <p>Loading...</p>}
+
                 {vocabulary.map(({ characters, id, object }) => (
-                    <Card key={id} character={characters} object={object} />
+                    <Card type='vocabulary' key={id} character={characters} object={object} />
                 ))}
             </div>
         </div>
