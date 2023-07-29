@@ -5,7 +5,7 @@ import { UserDTO } from '../../../configuration/http/dto/UserDTO';
 import { subjectMapper } from '../mappers/subject.mapper';
 import { userMapper } from '../mappers/user.mapper';
 
-const BASE_URL = 'https://api.wanikani.com/v2';
+const BASE_URL = process.env.WANIKANI_API_URL;
 
 export const wanikaniRepository = (): IWanikaniRepository => ({
     getAllSubjects: async () => {
