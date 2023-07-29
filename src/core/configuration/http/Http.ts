@@ -1,8 +1,6 @@
-import { WANIKANI_API_KEY } from '../../../views/react-client/src/constants/env';
-
 const headers = {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + WANIKANI_API_KEY
+    Authorization: 'Bearer ' + process.env.WANIKANI_API_KEY
 };
 
 export const http = {

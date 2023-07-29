@@ -6,3 +6,4 @@
 /lib
 /src/domain/**/*.js
 /src/infrastructure/**/*.js
+/src/views/*/node_modules/
