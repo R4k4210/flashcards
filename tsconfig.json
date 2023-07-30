@@ -21,8 +21,12 @@
         "declaration": true,
         "rootDir": "./src",
         "outDir": "./lib",
-        "checkJs": false
+        "checkJs": false,
+        "paths": {
+            "@/*": ["./src/*"],
+            "@reactclient/*": ["./src/views/react-client/*"]
+        }
     },
     "include": ["./src/**/*"],
-    "exclude": ["node_modules", "./src/infrastructure/views/*"]
+    "exclude": ["node_modules", "./src/views/*"]
 }
