@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { TSubject } from '@core/wanikani/domain/models/Subject';
 import { wanikaniController } from '@core/wanikani/application/WanikaniController';
-import { wanikaniRepository } from '@core/wanikani/infrastructure/repositories/WanikaniRepository';
+import { wanikaniRepository, wanikaniRepositoryStub } from '@core/wanikani/infrastructure/repositories';
 
 const useGetSubjects = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +11,7 @@ const useGetSubjects = () => {
     const [vocabulary, setVocabulary] = useState<TSubject[]>([]);
 
     useEffect(() => {
-        wanikaniController(wanikaniRepository())
+        wanikaniController(wanikaniRepositoryStub())
             .getSubjectsByUser()
             .then((subjects) => {
                 setKanjis(subjects.filter((subject) => subject.object === 'kanji'));
