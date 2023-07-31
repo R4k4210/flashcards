@@ -10,7 +10,7 @@ const BASE_URL = process.env.WANIKANI_API_URL;
 export const wanikaniRepository = (): IWanikaniRepository => ({
     getAllSubjects: async () => {
         try {
-            let next_url = `${BASE_URL}/subjects`;
+            let next_url: string | null = `${BASE_URL}/subjects`;
             let subjectsCollection: SubjectDTO[] = [];
 
             do {

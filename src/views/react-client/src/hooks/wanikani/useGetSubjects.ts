@@ -11,7 +11,7 @@ const useGetSubjects = () => {
     const [vocabulary, setVocabulary] = useState<TSubject[]>([]);
 
     useEffect(() => {
-        wanikaniController(wanikaniRepositoryStub())
+        wanikaniController(wanikaniRepository())
             .getSubjectsByUser()
             .then((subjects) => {
                 setKanjis(subjects.filter((subject) => subject.object === 'kanji'));
