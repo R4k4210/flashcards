@@ -1,4 +1,4 @@
-import { UserDTO } from '@/core/configuration/http/dto/UserDTO';
+import { UserDTO } from '../../../configuration/http/dto/UserDTO';
 
 export const mockUser: UserDTO = {
     object: 'user',

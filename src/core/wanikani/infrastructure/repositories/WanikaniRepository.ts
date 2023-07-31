@@ -14,7 +14,7 @@ export const wanikaniRepository = (): IWanikaniRepository => ({
             let subjectsCollection: SubjectDTO[] = [];
 
             do {
-                const subjects = await http.get<SubjectsDTO>(next_url);
+                const subjects: SubjectsDTO = await http.get<SubjectsDTO>(next_url);
                 subjectsCollection = [...subjectsCollection, ...subjects.data];
                 next_url = subjects.pages.next_url;
             } while (next_url !== null);

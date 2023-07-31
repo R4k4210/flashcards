@@ -1,4 +1,4 @@
-import { SubjectsDTO } from '@/core/configuration/http/dto/SubjectDTO';
+import { SubjectsDTO } from '../../../configuration/http/dto/SubjectDTO';
 
 export const mockSubjects: SubjectsDTO = {
     object: 'collection',
