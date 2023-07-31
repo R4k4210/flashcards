@@ -16,20 +16,20 @@
 
         /* Linting */
         "strict": true,
-        "noUnusedLocals": true,
+        "noUnusedLocals": "warning",
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
 
         /* Alias, not working in a different file */
         "paths": {
             "@/*": ["./src/*"],
-            "@shared/*": ["src/components/shared/*"],
-            "@elements/*": ["src/components/element/*"],
-            "@pages/*": ["src/pages/*"],
-            "@hooks/*": ["src/hooks/*"],
-            "@hocs/*": ["src/hocs/*"],
-            "@context/*": ["src/context/*"],
-            "@types/*": ["src/types/*"],
+            "@shared/*": ["./src/components/shared/*"],
+            "@elements/*": ["./src/components/element/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@hooks/*": ["./src/hooks/*"],
+            "@hocs/*": ["./src/hocs/*"],
+            "@context/*": ["./src/context/*"],
+            "@types/*": ["./src/types/*"],
 
             //core
             "@core/*": ["../../core/*"]

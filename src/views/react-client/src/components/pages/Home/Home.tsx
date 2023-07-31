@@ -1,41 +1,35 @@
+import { useState } from 'react';
 import useGetSubjects from '@/hooks/wanikani/useGetSubjects';
 import styles from './Home.module.scss';
-import Card from './components/Card/Card';
+import Accordion from './components/Accordion';
+import CardList from './components/CardList/CardList';
 
 const Home = () => {
+    const [selectedCard, setSelectedCard] = useState(-1);
     const { data, error, isLoading } = useGetSubjects();
     const { kanjis, radicals, vocabulary } = data;
+
+    const selectCard = (id: number) => {
+        setSelectedCard(id);
+    };
 
     return (
         <div className={styles.container}>
             <h1>Wanikani Cards</h1>
 
-            <h2>Radicals</h2>
-            <div className={styles.subjectsContainer}>
-                {isLoading && <p>Loading...</p>}
+            <Accordion title='Kanjis' expanded={true}>
+                <CardList subjects={kanjis} isLoading={isLoading} selectedCard={selectedCard} onCardClick={selectCard} />
+            </Accordion>
 
-                {radicals.map(({ characters, id, object, character_images }) => (
-                    <Card type='radical' key={id} character={characters} object={object} character_images={character_images} />
-                ))}
-            </div>
+            <Accordion title='Radicals' expanded={false}>
+                <CardList subjects={radicals} isLoading={isLoading} selectedCard={selectedCard} onCardClick={selectCard} />
+            </Accordion>
 
-            <h2>Kanjis</h2>
-            <div className={styles.subjectsContainer}>
-                {isLoading && <p>Loading...</p>}
+            <Accordion title='Vocabulary' expanded={false}>
+                <CardList subjects={vocabulary} isLoading={isLoading} selectedCard={selectedCard} onCardClick={selectCard} />
+            </Accordion>
 
-                {kanjis.map(({ characters, id, object }) => (
-                    <Card type='kanji' key={id} character={characters} object={object} />
-                ))}
-            </div>
-
-            <h2>Vocabulary</h2>
-            <div className={styles.subjectsContainer}>
-                {isLoading && <p>Loading...</p>}
-
-                {vocabulary.map(({ characters, id, object }) => (
-                    <Card type='vocabulary' key={id} character={characters} object={object} />
-                ))}
-            </div>
+            {error && <p>{'Hubo un error cargando los datos, por favor intente más tarde'}</p>}
         </div>
     );
 };
